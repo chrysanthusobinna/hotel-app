@@ -28,7 +28,7 @@ def add_guest(name, phone, address, email, room_class, room_number, amount_paid)
     """
     guest_data = [name, phone, address, email, room_class, room_number, amount_paid]
     SHEET.worksheet(WORKSHEET).append_row(guest_data) 
-    print(f"Added guest: {name}")
+    print(f"Added guest: {name} \n")
 
 def view_all_guests():
     """
@@ -62,7 +62,7 @@ def update_guest(email, data_to_update):
             for key, value in data_to_update.items():
                 col_index = list(record.keys()).index(key) + 1  # Get the column index
                 SHEET.worksheet(WORKSHEET).update_cell(row_number, col_index, value)
-            print(f"Updated guest: {email}")
+            print(f"Updated guest: {email} \n")
             return
     print(f"Guest with email {email} not found.")
 
@@ -77,9 +77,9 @@ def delete_guest(email):
         if record["Email Address"] == email:
             row_number = idx + 2  # Row number in Google Sheets (1-based)
             SHEET.worksheet(WORKSHEET).delete_rows(row_number)
-            print(f"Deleted guest with email: {email}")
+            print(f"Deleted guest with email: {email} \n")
             return
-    print(f"Guest with email {email} not found.")
+    print(f"Guest with email {email} not found. \n")
 
 
 def main():
@@ -87,15 +87,15 @@ def main():
     Displays a menu and handles user input.
     """
     while True:
-        print("\nHotel Management System")
-        print("1. Add Guest")
-        print("2. View All Guests")
-        print("3. Search Guest by Email")
-        print("4. Update Guest")
-        print("5. Delete Guest")
-        print("6. Exit")
+        print("\nHotel Management System \n")
+        print("1. Add Guest \n")
+        print("2. View All Guests \n")
+        print("3. Search Guest by Email \n")
+        print("4. Update Guest \n")
+        print("5. Delete Guest \n")
+        print("6. Exit \n")
         
-        choice = input("Enter your choice: ")
+        choice = input("Enter your choice: \n")
         
         if choice == "1":
             name = input("Enter guest name: ")
@@ -116,7 +116,7 @@ def main():
             if guest:
                 print(guest)
             else:
-                print("Guest not found.")
+                print("Guest not found. \n")
         
         elif choice == "4":
             email = input("Enter guest email to update: ")
@@ -140,11 +140,11 @@ def main():
             delete_guest(email)
         
         elif choice == "6":
-            print("Exiting...")
+            print("Exiting... \n")
             break
         
         else:
-            print("Invalid choice, try again.")
+            print("Invalid choice, try again. \n")
 
 # Start the program
 main()
