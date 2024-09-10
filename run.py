@@ -67,13 +67,18 @@ def update_guest(email, data_to_update):
     print(f"Guest with email {email} not found.")
 
 
-data_to_update = {
-    "Guest Name": "Chrys Obinna",
-    "Phone Number": "08066554433",
-    "Address": "London, UK",
-    "Class of Room Booked": "Diamond",
-    "Room Number": "9",
-    "Amount Paid": "800"
-}
+def delete_guest(email):
+    """
+    Deletes guest entry by searching for their email address.
+    """
+    records = SHEET.worksheet(WORKSHEET).get_all_records()
+    
+    for idx, record in enumerate(records):
+        if record["Email Address"] == email:
+            row_number = idx + 2  # Row number in Google Sheets (1-based)
+            SHEET.worksheet(WORKSHEET).delete_rows(row_number)
+            print(f"Deleted guest with email: {email}")
+            return
+    print(f"Guest with email {email} not found.")
 
-update_guest("chrys@gmail.com", data_to_update)
+delete_guest("chrys@gmail.com")
