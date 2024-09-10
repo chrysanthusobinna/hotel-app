@@ -81,4 +81,70 @@ def delete_guest(email):
             return
     print(f"Guest with email {email} not found.")
 
-delete_guest("chrys@gmail.com")
+
+def main():
+    """
+    Displays a menu and handles user input.
+    """
+    while True:
+        print("\nHotel Management System")
+        print("1. Add Guest")
+        print("2. View All Guests")
+        print("3. Search Guest by Email")
+        print("4. Update Guest")
+        print("5. Delete Guest")
+        print("6. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            name = input("Enter guest name: ")
+            phone = input("Enter phone number: ")
+            address = input("Enter address: ")
+            email = input("Enter email: ")
+            room_class = input("Enter room class: ")
+            room_number = input("Enter room number: ")
+            amount_paid = input("Enter amount paid: ")
+            add_guest(name, phone, address, email, room_class, room_number, amount_paid)
+        
+        elif choice == "2":
+            view_all_guests()
+        
+        elif choice == "3":
+            email = input("Enter guest email to search: ")
+            guest = search_guest_by_email(email)
+            if guest:
+                print(guest)
+            else:
+                print("Guest not found.")
+        
+        elif choice == "4":
+            email = input("Enter guest email to update: ")
+            updated_data = {}
+            if input("Update name? (y/n): ") == "y":
+                updated_data["Guest Name"] = input("Enter new name: ")
+            if input("Update phone? (y/n): ") == "y":
+                updated_data["Phone Number"] = input("Enter new phone: ")
+            if input("Update address? (y/n): ") == "y":
+                updated_data["Address"] = input("Enter new address: ")
+            if input("Update room class? (y/n): ") == "y":
+                updated_data["Class of Room Booked"] = input("Enter new room class: ")
+            if input("Update room number? (y/n): ") == "y":
+                updated_data["Room Number"] = input("Enter new room number: ")
+            if input("Update amount paid? (y/n): ") == "y":
+                updated_data["Amount Paid"] = input("Enter new amount: ")
+            update_guest(email, updated_data)
+        
+        elif choice == "5":
+            email = input("Enter guest email to delete: ")
+            delete_guest(email)
+        
+        elif choice == "6":
+            print("Exiting...")
+            break
+        
+        else:
+            print("Invalid choice, try again.")
+
+# Start the program
+main()
