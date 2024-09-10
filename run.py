@@ -38,5 +38,16 @@ def view_all_guests():
     for row in rows:
         print(row)
 
+def search_guest_by_email(email):
+    """
+    Search for a guest entry using their email address.
+    """
+    records = SHEET.worksheet(WORKSHEET).get_all_records()  # Fetch all rows as dictionaries
+    for record in records:
+        if record["Email Address"] == email:
+            return record
+    return None
 
-view_all_guests()
+
+datax = search_guest_by_email("chrys@gmail.com")
+print(datax)
