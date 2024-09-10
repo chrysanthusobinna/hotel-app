@@ -30,5 +30,13 @@ def add_guest(name, phone, address, email, room_class, room_number, amount_paid)
     SHEET.worksheet(WORKSHEET).append_row(guest_data) 
     print(f"Added guest: {name}")
 
+def view_all_guests():
+    """
+    Fetches and prints all guest entries from the spreadsheet.
+    """
+    rows = SHEET.worksheet(WORKSHEET).get_all_values()
+    for row in rows:
+        print(row)
 
-add_guest("chrys", "08026044909", "bolton, UK", "chrys@gmail.com", "Gold Room", "5", "500")
+
+view_all_guests()
