@@ -49,5 +49,31 @@ def search_guest_by_email(email):
     return None
 
 
-datax = search_guest_by_email("chrys@gmail.com")
-print(datax)
+def update_guest(email, data_to_update):
+    """
+    Updates guest entry by searching for their email address.
+    `data_to_update` should be a dictionary with updated fields.
+    """
+    records = SHEET.worksheet(WORKSHEET).get_all_records()
+    
+    for idx, record in enumerate(records):
+        if record["Email Address"] == email:
+            row_number = idx + 2  # Row number in Google Sheets (1-based)
+            for key, value in data_to_update.items():
+                col_index = list(record.keys()).index(key) + 1  # Get the column index
+                SHEET.worksheet(WORKSHEET).update_cell(row_number, col_index, value)
+            print(f"Updated guest: {email}")
+            return
+    print(f"Guest with email {email} not found.")
+
+
+data_to_update = {
+    "Guest Name": "Chrys Obinna",
+    "Phone Number": "08066554433",
+    "Address": "London, UK",
+    "Class of Room Booked": "Diamond",
+    "Room Number": "9",
+    "Amount Paid": "800"
+}
+
+update_guest("chrys@gmail.com", data_to_update)
