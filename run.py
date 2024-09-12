@@ -1,6 +1,8 @@
 import os
 import gspread
 from google.oauth2.service_account import Credentials
+from prettytable import PrettyTable
+
 
 
 # Google Sheets API setup
@@ -21,6 +23,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('hotel-app')
 WORKSHEET = "booking-record"
 
+ 		
+
+
 def clear():
     """
     Clear function to clean-up the terminal so things don't get messy.
@@ -40,12 +45,28 @@ def add_guest(name, phone, address, email, room_class, room_number, amount_paid)
 
 def view_all_guests():
     """
-    Fetches and prints all guest entries from the spreadsheet.
+    Fetches and prints all guest entries from the spreadsheet using PrettyTable.
     """
     rows = SHEET.worksheet(WORKSHEET).get_all_values()
-    for row in rows:
-        print(row)
+
+    if not rows:
+        print("No data available.")
+        return
+    # Create a PrettyTable instance
+    table = PrettyTable()
+
+    # Set the field names (headers) using the first row of data
+    table.field_names = rows[0]
+
+    # Add the remaining rows to the table
+    for row in rows[1:]:  # Skip the header row
+        table.add_row(row)
+
+    # Print the table
+    print(table)
+
     input("Press Enter to Continue\n")
+    
 
 
 def search_guest_by_email(email):
@@ -170,7 +191,9 @@ def main():
         
         else:
             print("Invalid choice, try again.\n")
-
+ 
 # Start the program
 clear()
 main()
+ 
+ 
