@@ -71,12 +71,18 @@ def view_all_guests():
 
 def search_guest_by_email(email):
     """
-    Search for a guest entry using their email address.
+    Search for a guest entry using their email address and display the result in a formatted table.
     """
     records = SHEET.worksheet(WORKSHEET).get_all_records()  # Fetch all rows as dictionaries
     for record in records:
         if record["Email Address"] == email:
-            return record
+            # Create a PrettyTable instance
+            table = PrettyTable()
+            table.field_names = record.keys()  # Set table headers to the keys of the record
+            table.add_row(record.values())  # Add the guest's information as a row
+            
+            print(table)  # Print the formatted table
+    print("Guest not found.")
     return None
     
 
@@ -157,10 +163,7 @@ def main():
             clear()
             email = input("Enter guest email to search: ")
             guest = search_guest_by_email(email)
-            if guest:
-                print(guest)
-            else:
-                print("Guest not found.\n")
+ 
             input("Press Enter to Continue\n")
 
         
