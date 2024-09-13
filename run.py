@@ -1,4 +1,5 @@
 import os
+import re
 import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
@@ -32,6 +33,39 @@ def clear():
     """
     os.system("cls" if os.name == "nt" else "clear")
 
+
+def is_valid_name(name):
+    return bool(name.strip()) and all(part.isalpha() or part.replace("-", "").isalpha()
+
+def is_valid_phone(phone):
+    # A simple regex for validating phone numbers (adjust as needed)
+    return bool(re.match(r'^\+?[1-9]\d{1,14}$', phone))
+
+def is_valid_address(address):
+    return bool(address.strip())  # Basic check: not empty
+
+def is_valid_email(email):
+    # Simple regex for validating email format
+    return bool(re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email))
+
+def is_valid_room_class(room_class):
+    # You can define accepted room classes as per your requirements
+    accepted_classes = {'Single', 'Double', 'Suite'}
+    return room_class in accepted_classes
+
+def is_valid_room_number(room_number):
+    return room_number.isdigit()  # Check if room number is a digit
+
+def is_valid_amount_paid(amount_paid):
+    try:
+        float_amount = float(amount_paid)
+        return float_amount >= 0  # Ensure amount paid is a positive number
+    except ValueError:
+        return False
+
+
+
+        
 
 def add_guest(name, phone, address, email, room_class, room_number, amount_paid):
     """
@@ -82,8 +116,11 @@ def search_guest_by_email(email):
             table.add_row(record.values())  # Add the guest's information as a row
             
             print(table)  # Print the formatted table
+            return record  # Return the record as found
+
     print("Guest not found.")
     return None
+
     
 
 
@@ -145,15 +182,32 @@ def main():
         choice = input("Enter your choice:\n")
         
         if choice == "1":
-            clear()
-            name = input("Enter guest name: ")
-            phone = input("Enter phone number: ")
-            address = input("Enter address: ")
-            email = input("Enter email: ")
-            room_class = input("Enter room class: ")
-            room_number = input("Enter room number: ")
-            amount_paid = input("Enter amount paid: ")
+
+            while True:
+                clear()
+                name = input("Enter guest name: ")
+                
+                if is_valid_name(name):
+                    break  # Exit the loop if the name is valid
+                else:
+                    print("Invalid name. Please try again.")
+                    
+
+            while True:
+                clear()
+                phone = input("Enter phone number: ")
+                
+                if is_valid_phone(phone):
+                    break  # Exit the loop if the name is valid
+                else:
+                    print("Invalid phone number. Please enter a valid phone number.")
+
+
             add_guest(name, phone, address, email, room_class, room_number, amount_paid)
+
+      
+
+            
         
         elif choice == "2":
             clear()
@@ -200,3 +254,47 @@ clear()
 main()
  
  
+
+
+   """
+
+            while True:       
+                clear()
+                address = input("Enter address: ")
+                if not is_valid_address(address):
+                    print("Invalid address. Please enter a valid address.")
+                    continue
+            break
+
+            while True:
+                clear()
+                email = input("Enter email: ")
+                if not is_valid_email(email):
+                    print("Invalid email. Please enter a valid email address.")
+                    continue
+            break
+               
+            while True:
+                clear()
+                room_class = input("Enter room class: ")
+                if not is_valid_room_class(room_class):
+                    print("Invalid room class. Please enter a valid room class (Single, Double, Suite).")
+                    continue
+            break
+               
+            while True:
+                clear()
+                room_number = input("Enter room number: ")
+                if not is_valid_room_number(room_number):
+                    print("Invalid room number. Please enter a valid room number.")
+                    continue
+            break
+                
+            while True:
+                clear()
+                amount_paid = input("Enter amount paid: ")
+                if not is_valid_amount_paid(amount_paid):
+                    print("Invalid amount. Please enter a valid amount paid.")
+                    
+            break
+        """git
