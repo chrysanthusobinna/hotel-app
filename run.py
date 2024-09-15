@@ -1,4 +1,7 @@
-import os
+ 
+                     
+                    
+                    import os
 import re
 import gspread
 from google.oauth2.service_account import Credentials
@@ -35,11 +38,18 @@ def clear():
 
 
 def is_valid_name(name):
-    return bool(name.strip()) and all(part.isalpha() or part.replace("-", "").isalpha()
+    trimmed_name = name.strip()
+    if not trimmed_name:
+        return False
+    for part in trimmed_name.split():
+        if not all(char.isalpha() or char == '-' for char in part):
+            return False
+    return True
 
 def is_valid_phone(phone):
     # A simple regex for validating phone numbers (adjust as needed)
-    return bool(re.match(r'^\+?[1-9]\d{1,14}$', phone))
+    phone_str = str(phone)  # Ensure the phone number is a string
+    return bool(re.match(r'^\+?[1-9]\d{1,14}$', phone_str))
 
 def is_valid_address(address):
     return bool(address.strip())  # Basic check: not empty
@@ -48,13 +58,25 @@ def is_valid_email(email):
     # Simple regex for validating email format
     return bool(re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email))
 
+def email_exists(email):
+    records = SHEET.worksheet(WORKSHEET).get_all_records()
+    
+    # Iterate through each record to check for the email
+    for record in records:
+        if record.get('Email Address') == email:
+            return True
+    
+    return False
+
 def is_valid_room_class(room_class):
     # You can define accepted room classes as per your requirements
-    accepted_classes = {'Single', 'Double', 'Suite'}
-    return room_class in accepted_classes
+    accepted_classes = {'single', 'double', 'suite'}
+    # Convert the input room_class to lowercase and check against accepted_classes
+    return room_class.lower() in accepted_classes
 
 def is_valid_room_number(room_number):
-    return room_number.isdigit()  # Check if room number is a digit
+    room_number_str = str(room_number)  # Ensure the room number is a string
+    return room_number_str.isdigit() and int(room_number_str) > 0 # Check if room number is a digit
 
 def is_valid_amount_paid(amount_paid):
     try:
@@ -121,7 +143,18 @@ def search_guest_by_email(email):
     print("Guest not found.")
     return None
 
-    
+
+def get_guest_record_by_email(email):
+    """
+    Search for a guest record using their email address 
+    """
+    records = SHEET.worksheet(WORKSHEET).get_all_records()  # Fetch all rows as dictionaries
+    for record in records:
+        if record["Email Address"] == email:
+            return record  # Return the record as found
+
+    print("Guest not found.")
+    return None    
 
 
 def update_guest(email, data_to_update):
@@ -182,33 +215,86 @@ def main():
         choice = input("Enter your choice:\n")
         
         if choice == "1":
-
+            clear()
             while True:
-                clear()
+                # Get name and validate
                 name = input("Enter guest name: ")
-                
-                if is_valid_name(name):
-                    break  # Exit the loop if the name is valid
+                if not is_valid_name(name):
+                    clear()
+                    print(f"You have entered an Invalid name - '{name}'\n")
+
                 else:
-                    print("Invalid name. Please try again.")
-                    
+                    clear()
+                    break  # Move to the next input if name is valid
+            
+            while True:
+                # Get phone number and validate
+                phone = input("Enter phone number: ")
+                if not is_valid_phone(phone):
+                    clear()
+                    print(f"You have entered an Invalid phone number - '{phone}'\n")
+                else:
+                    clear()
+                    break  # Move to the next input if phone is valid
 
             while True:
-                clear()
-                phone = input("Enter phone number: ")
-                
-                if is_valid_phone(phone):
-                    break  # Exit the loop if the name is valid
+                # Get address and validate
+                address = input("Enter address: ")
+                if not is_valid_address(address):
+                    clear()
+                    print(f"You have entered an Invalid address - '{address}'\n")
                 else:
-                    print("Invalid phone number. Please enter a valid phone number.")
+                    clear()
+                    break  # Finish if address is valid
 
+            while True:
+                # Get Email and validate
+                email = input("Enter email: ")
+                
+                if not is_valid_email(email):
+                    clear()
+                    print(f"You have entered an Invalid Email Address - '{email}'\n")
+                elif email_exists(email):
+                    clear()
+                    print(f"The email address '{email}' already exists. Please enter a different email.\n")
+                else:
+                    clear()
+                    break  # Finish if email is valid and doesn't already exist
 
+            while True:
+                # Get Room class and validate
+                room_class = input("Enter room class [Single, Double, Suite]: ")
+                if not is_valid_room_class(room_class):
+                    clear()
+                    print(f"You have entered an Invalid Room class - '{room_class}'\n")
+                else:
+                    clear()
+                    break  # Finish if Room class is valid
+
+            while True:
+                # Get Room Number and validate
+                room_number = input("Enter room number: ")
+                if not is_valid_room_number(room_number):
+                    clear()
+                    print(f"You have entered an Invalid Room Number - '{room_number}'\n")
+                else:
+                    clear()
+                    break  # Finish if Room Number is valid
+
+            while True:
+                # Get Amount Paid and validate
+                amount_paid = input("Enter amount paid: ")
+                if not is_valid_amount_paid(amount_paid):
+                    clear()
+                    print(f"You have entered an Amount Paid - '{amount_paid}'\n")
+                else:
+                    clear()
+                    break  # Finish if Amount Paid is valid
+                
+                
             add_guest(name, phone, address, email, room_class, room_number, amount_paid)
 
-      
-
             
-        
         elif choice == "2":
             clear()
             view_all_guests()
@@ -222,21 +308,96 @@ def main():
 
         
         elif choice == "4":
+            clear()
             email = input("Enter guest email to update: ")
-            updated_data = {}
-            if input("Update name? (y/n): ") == "y":
-                updated_data["Guest Name"] = input("Enter new name: ")
-            if input("Update phone? (y/n): ") == "y":
-                updated_data["Phone Number"] = input("Enter new phone: ")
-            if input("Update address? (y/n): ") == "y":
-                updated_data["Address"] = input("Enter new address: ")
-            if input("Update room class? (y/n): ") == "y":
-                updated_data["Class of Room Booked"] = input("Enter new room class: ")
-            if input("Update room number? (y/n): ") == "y":
-                updated_data["Room Number"] = input("Enter new room number: ")
-            if input("Update amount paid? (y/n): ") == "y":
-                updated_data["Amount Paid"] = input("Enter new amount: ")
-            update_guest(email, updated_data)
+            guest = get_guest_record_by_email(email)
+            clear()
+
+            if guest:
+                
+                # Validate and update guest name
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    name = input(f"Name [{guest['Guest Name']}]: ") or guest['Guest Name']
+                    if is_valid_name(name):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid name - '{name}'")
+
+                
+                # Validate and update phone number
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    phone = input(f"Phone Number [{guest['Phone Number']}]: ") or guest['Phone Number']
+                    if is_valid_phone(phone):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid phone number - '{phone}'\n") 
+                
+                # Validate and update address
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    address = input(f"Address [{guest['Address']}]: ") or guest['Address']
+                    if is_valid_address(address):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid address - '{address}'\n")
+                
+                # Validate and update room class
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.")
+                    print("Choose  [Single, Double, Suite].\n")
+                    room_class = input(f"Room Class [{guest['Class of Room Booked']}]: ") or guest['Class of Room Booked']
+                    if is_valid_room_class(room_class):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid Room class - '{room_class}'\n")
+                
+                # Validate and update room number
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    room_number = input(f"Room Number [{guest['Room Number']}]: ") or guest['Room Number']
+                    if is_valid_room_number(room_number):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid Room Number - '{room_number}'\n")
+                
+                # Validate and update amount paid
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    amount_paid = input(f"Amount Paid [{guest['Amount Paid']}]: ") or guest['Amount Paid']
+                    if is_valid_amount_paid(amount_paid):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Amount Paid - '{amount_paid}'\n")  
+
+                # Prepare the updated data dictionary
+                updated_data = {
+                    "Guest Name": name,
+                    "Phone Number": phone,
+                    "Address": address,
+                    "Class of Room Booked": room_class,
+                    "Room Number": room_number,
+                    "Amount Paid": amount_paid
+                }
+                
+                # Update the guest record
+                update_guest(email, updated_data)
+
+
+
         
         elif choice == "5":
             email = input("Enter guest email to delete: ")
@@ -252,49 +413,3 @@ def main():
 # Start the program
 clear()
 main()
- 
- 
-
-
-   """
-
-            while True:       
-                clear()
-                address = input("Enter address: ")
-                if not is_valid_address(address):
-                    print("Invalid address. Please enter a valid address.")
-                    continue
-            break
-
-            while True:
-                clear()
-                email = input("Enter email: ")
-                if not is_valid_email(email):
-                    print("Invalid email. Please enter a valid email address.")
-                    continue
-            break
-               
-            while True:
-                clear()
-                room_class = input("Enter room class: ")
-                if not is_valid_room_class(room_class):
-                    print("Invalid room class. Please enter a valid room class (Single, Double, Suite).")
-                    continue
-            break
-               
-            while True:
-                clear()
-                room_number = input("Enter room number: ")
-                if not is_valid_room_number(room_number):
-                    print("Invalid room number. Please enter a valid room number.")
-                    continue
-            break
-                
-            while True:
-                clear()
-                amount_paid = input("Enter amount paid: ")
-                if not is_valid_amount_paid(amount_paid):
-                    print("Invalid amount. Please enter a valid amount paid.")
-                    
-            break
-        """git
