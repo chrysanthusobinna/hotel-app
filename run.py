@@ -215,7 +215,7 @@ def main():
             clear()
             while True:
                 # Get name and validate
-                name = input("Enter guest name: ")
+                name = input("Enter guest name:\n")
                 if not is_valid_name(name):
                     clear()
                     print(f"You have entered an Invalid name - '{name}'\n")
@@ -226,7 +226,7 @@ def main():
             
             while True:
                 # Get phone number and validate
-                phone = input("Enter phone number: ")
+                phone = input("Enter phone number:\n")
                 if not is_valid_phone(phone):
                     clear()
                     print(f"You have entered an Invalid phone number - '{phone}'\n")
@@ -236,7 +236,7 @@ def main():
 
             while True:
                 # Get address and validate
-                address = input("Enter address: ")
+                address = input("Enter address:\n")
                 if not is_valid_address(address):
                     clear()
                     print(f"You have entered an Invalid address - '{address}'\n")
@@ -246,7 +246,7 @@ def main():
 
             while True:
                 # Get Email and validate
-                email = input("Enter email: ")
+                email = input("Enter email:\n")
                 
                 if not is_valid_email(email):
                     clear()
@@ -260,7 +260,7 @@ def main():
 
             while True:
                 # Get Room class and validate
-                room_class = input("Enter room class [Single, Double, Suite]: ")
+                room_class = input("Enter room class [Single, Double, Suite]: \n")
                 if not is_valid_room_class(room_class):
                     clear()
                     print(f"You have entered an Invalid Room class - '{room_class}'\n")
@@ -270,7 +270,7 @@ def main():
 
             while True:
                 # Get Room Number and validate
-                room_number = input("Enter room number: ")
+                room_number = input("Enter room number: \n")
                 if not is_valid_room_number(room_number):
                     clear()
                     print(f"You have entered an Invalid Room Number - '{room_number}'\n")
@@ -280,7 +280,7 @@ def main():
 
             while True:
                 # Get Amount Paid and validate
-                amount_paid = input("Enter amount paid: ")
+                amount_paid = input("Enter amount paid: \n")
                 if not is_valid_amount_paid(amount_paid):
                     clear()
                     print(f"You have entered an Amount Paid - '{amount_paid}'\n")
@@ -298,7 +298,7 @@ def main():
         
         elif choice == "3":
             clear()
-            email = input("Enter guest email to search: ")
+            email = input("Enter guest email to search:\n")
             guest = search_guest_by_email(email)
  
             input("Press Enter to Continue\n")
@@ -306,7 +306,7 @@ def main():
         
         elif choice == "4":
             clear()
-            email = input("Enter guest email to update: ")
+            email = input("Enter guest email to update:\n")
             guest = get_guest_record_by_email(email)
             clear()
 
@@ -327,7 +327,7 @@ def main():
                 # Validate and update phone number
                 while True:
                     print("Press Enter to keep the current value or type a new value to update.\n")
-                    phone = input(f"Phone Number [{guest['Phone Number']}]: ") or guest['Phone Number']
+                    phone = input(f"Phone Number [{guest['Phone Number']}]: \n") or guest['Phone Number']
                     if is_valid_phone(phone):
                         clear()
                         break
@@ -338,7 +338,7 @@ def main():
                 # Validate and update address
                 while True:
                     print("Press Enter to keep the current value or type a new value to update.\n")
-                    address = input(f"Address [{guest['Address']}]: ") or guest['Address']
+                    address = input(f"Address [{guest['Address']}]: \n") or guest['Address']
                     if is_valid_address(address):
                         clear()
                         break
@@ -350,7 +350,7 @@ def main():
                 while True:
                     print("Press Enter to keep the current value or type a new value to update.")
                     print("Choose  [Single, Double, Suite].\n")
-                    room_class = input(f"Room Class [{guest['Class of Room Booked']}]: ") or guest['Class of Room Booked']
+                    room_class = input(f"Room Class [{guest['Class of Room Booked']}]: \n") or guest['Class of Room Booked']
                     if is_valid_room_class(room_class):
                         clear()
                         break
@@ -361,7 +361,7 @@ def main():
                 # Validate and update room number
                 while True:
                     print("Press Enter to keep the current value or type a new value to update.\n")
-                    room_number = input(f"Room Number [{guest['Room Number']}]: ") or guest['Room Number']
+                    room_number = input(f"Room Number [{guest['Room Number']}]: \n") or guest['Room Number']
                     if is_valid_room_number(room_number):
                         clear()
                         break
@@ -372,7 +372,7 @@ def main():
                 # Validate and update amount paid
                 while True:
                     print("Press Enter to keep the current value or type a new value to update.\n")
-                    amount_paid = input(f"Amount Paid [{guest['Amount Paid']}]: ") or guest['Amount Paid']
+                    amount_paid = input(f"Amount Paid [{guest['Amount Paid']}]: \n") or guest['Amount Paid']
                     if is_valid_amount_paid(amount_paid):
                         clear()
                         break
@@ -397,7 +397,7 @@ def main():
 
         
         elif choice == "5":
-            email = input("Enter guest email to delete: ")
+            email = input("Enter guest email to delete: \n")
             delete_guest(email)
         
         elif choice == "6":
