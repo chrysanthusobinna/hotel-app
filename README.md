@@ -6,6 +6,62 @@ The **Hotel App** is a Python command-line application designed to manage guest 
 
 ---
 
+
+
+## User Story
+
+**Title:** Guest Management for a Hotel Booking System
+
+**As a** hotel receptionist,  
+**I want to** efficiently manage guest information,  
+**so that** I can provide a seamless check-in and check-out experience.
+
+#### Acceptance Criteria:
+
+1. **Add Guest**  
+   - **Given** I am on the main menu,  
+   - **When** I choose to add a new guest,  
+   - **Then** I should be prompted to enter the guest's name, phone number, address, email, room class, room number, and amount paid.  
+   - **And** the system should validate each input and notify me if any information is invalid.  
+   - **And** if all information is valid, the guest should be added to the database, and a confirmation message should be displayed.
+
+2. **View All Guests**  
+   - **Given** I am on the main menu,  
+   - **When** I choose to view all guests,  
+   - **Then** I should see a list of all guest entries displayed in a well-formatted table.
+
+3. **Search Guest by Email**  
+   - **Given** I am on the main menu,  
+   - **When** I choose to search for a guest by email,  
+   - **Then** I should be prompted to enter the email address.  
+   - **And** the system should display the guest's information in a formatted table if the email exists, or notify me that the guest was not found.
+
+4. **Update Guest Information**  
+   - **Given** I am on the main menu,  
+   - **When** I choose to update a guest's information and enter the guest's email,  
+   - **Then** I should see the current details of the guest.  
+   - **And** I should be able to update any field, with the system validating new entries.  
+   - **And** after confirming the updates, the changes should be saved.
+
+5. **Delete Guest**  
+   - **Given** I am on the main menu,  
+   - **When** I choose to delete a guest and provide the email,  
+   - **Then** the system should find the guest and delete their entry from the database.  
+   - **And** I should receive confirmation that the guest has been deleted.
+
+6. **Input Validation**  
+   - **Given** I am entering any guest information,  
+   - **When** I provide invalid data (e.g., an invalid phone number or email),  
+   - **Then** I should receive an error message indicating the specific input that was invalid.  
+   - **And** I should be prompted to re-enter the data.
+
+7. **User Interface**  
+   - **Given** I am using the system,  
+   - **When** I navigate through the menu,  
+   - **Then** the interface should be clear and user-friendly, with instructions provided for each option.  
+   - **And** it should be accessible on PC devices for the best experience.
+   
+
 ## Key Features
 
 - **Add Guest**: Add a new guest and their information to the hotel’s database.
