@@ -1,32 +1,137 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Hotel App
 
-Welcome,
+## Project Overview
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
-
-## Reminders
-
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+The **Hotel App** is a Python command-line application designed to manage guest information for a hotel. It interacts with a Google Spreadsheet through the **Google Sheets API** and **Google Drive API** to perform CRUD (Create, Read, Update, Delete) operations on guest records. The app allows hotel staff to manage guest information such as name, phone number, address, email, room class, room number, and amount paid, all stored in a spreadsheet on Google Drive.
 
 ---
 
-Happy coding!
+## Key Features
+
+- **Add Guest**: Add a new guest and their information to the hotel’s database.
+- **View All Guests**: View a list of all the guests stored in the spreadsheet.
+- **Search Guest by Email**: Search for guest details using their email address.
+- **Update Guest**: Update specific guest details such as name, phone, address, room class, room number, and amount paid.
+- **Delete Guest**: Delete a guest’s record using their email.
+  
+---
+
+## Technologies Used
+
+- **Python**: The core programming language used to develop the application.
+- **Google Sheets API**: Used to interact with a Google Spreadsheet for storing and retrieving guest data.
+- **Google Drive API**: Provides access to the Google Sheet stored in Google Drive.
+- **PrettyTable**: A Python library used to display the guest information in a neatly formatted table in the command-line interface.
+- **gspread**: A Python library to interact with Google Sheets.
+
+---
+
+## Setup Instructions
+
+To run this project on your local machine, follow these steps:
+
+### Prerequisites
+1. **Python 3.x**: Ensure that you have Python installed on your computer.
+2. **Google Cloud Credentials**: You need to enable the Google Sheets API and Google Drive API in your Google Cloud account and download the `creds.json` file (OAuth 2.0 credentials).
+3. **Dependencies**: Install the required Python libraries using pip:
+
+   ```bash
+   pip3 install gspread
+   pip3 install google-auth
+   pip3 install prettytable
+   ```
+
+### Steps to Set Up
+1. **Clone the Repository**:
+   Clone this repository to your local machine.
+   ```
+   git clone https://github.com/chrysanthusobinna/hotel-app.git
+   ```
+2. **Set Up Google Cloud Credentials**:
+   - Visit the [Google Developers Console](https://docs.google.com/spreadsheets/d/1MABIV-ix8CTtkvvS4BLH_S5YdTy7lRYCEz2r5IQKxjc/edit?usp=sharing).
+   - Create a new project and enable the Google Sheets API and Google Drive API.
+   - Create credentials and download the `creds.json` file.
+   - Place the `creds.json` file in the project directory.
+   
+3. **Run the App**:
+   Start the application by running the `run.py` file in the command line:
+   ```
+   python3 run.py
+   ```
+
+---
+
+## Application Workflow
+
+### 1. **Add Guest**:
+   - Input guest details: name, phone number, address, email, room class, room number, and amount paid.
+   - The app validates all inputs and checks for duplicate emails before adding the guest.
+
+### 2. **View All Guests**:
+   - Displays all guest records stored in the Google Sheet in a tabular format using PrettyTable.
+
+### 3. **Search Guest by Email**:
+   - Input the guest's email to retrieve and display their details.
+
+### 4. **Update Guest**:
+   - Input the guest’s email and update any of the fields (name, phone, etc.).
+
+### 5. **Delete Guest**:
+   - Input the guest’s email and delete their record from the database.
+
+### 6. **Exit**:
+   - Exit the application.
+
+---
+
+## Data Model
+
+The app uses a Google Spreadsheet as the backend database. Each guest's data is stored in a row of the spreadsheet. The columns represent:
+
+- Guest Name
+- Phone Number
+- Address
+- Email Address
+- Room Class
+- Room Number
+- Amount Paid
+
+### Flowchart
+
+The app's process is mapped out in a flowchart to visualize the flow of operations from the menu choices to CRUD functionalities. The flowchart can be found in the `documentation` folder.
+
+![Flowchart](documentation/flowchart.png)
+
+---
+
+## Validation
+
+- **Name**: Ensures the name contains only alphabetical characters and hyphens.
+- **Phone Number**: Validates phone numbers using a regular expression.
+- **Email**: Validates the email format and checks for duplicates.
+- **Room Class**: Ensures the room class is one of "Single", "Double", or "Suite".
+- **Room Number**: Ensures the room number is a positive integer.
+- **Amount Paid**: Ensures the amount paid is a valid, non-negative number.
+
+---
+
+## Dependencies
+
+- `gspread`: For interacting with Google Sheets.
+- `google-auth`: For handling authentication with Google APIs.
+- `prettytable`: For displaying data in table format in the terminal.
+
+---
+
+## Media & Attribution
+
+- [PrettyTable Documentation](https://pypi.org/project/PrettyTable/) was referenced for creating formatted tables in the terminal.
+- [Google Sheets API Documentation](https://developers.google.com/sheets/api) was used to integrate the application with Google Sheets.
+- [Google Drive API Documentation](https://developers.google.com/drive/api) was used to access the Google Sheets stored on Google Drive.
+
+---
+
+## Acknowledgements
+
+- Thanks to my mentor Tim Nelson for their support throughout the development of this project.
+- Special thanks to the **Code Institute** community for providing invaluable resources.
