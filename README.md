@@ -10,7 +10,7 @@ The **Hotel App** is a Python command-line application designed to manage guest 
 
 ## User Story
 
-**As a** hotel receptionist,  
+**As a** user,  
 **I want to** efficiently manage guest information,  
 **so that** I can provide a seamless check-in and check-out experience.
 
