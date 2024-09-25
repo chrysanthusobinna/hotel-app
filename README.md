@@ -62,13 +62,31 @@ The **Hotel App** is a Python command-line application designed to manage guest 
 
 ## Key Features
 
-- **Add Guest**: Add a new guest and their information to the hotel’s database.
-- **View All Guests**: View a list of all the guests stored in the spreadsheet.
-- **Search Guest by Email**: Search for guest details using their email address.
-- **Update Guest**: Update specific guest details such as name, phone, address, room class, room number, and amount paid.
-- **Delete Guest**: Delete a guest’s record using their email.
-  
----
+- **Menu**: A friendly Commaline user interface providing options for users to navigate around the app.  
+  ![Menu Screenshot](documentation/screenshot_menu.png)
+
+- **Add Guest**: Add a new guest and their information to the hotel’s database.  
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-1.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-2.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-3.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-4.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-5.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-6.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-7.png)
+  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-8.png)
+
+- **View All Guests**: View a list of all the guests stored in the spreadsheet.  
+  ![View All Guests Screenshot](documentation/screenshot_view_all_guests.png)
+
+- **Search Guest by Email**: Search for guest details using their email address.  
+  ![Search Guest by Email Screenshot](documentation/screenshot_search_guest.png)
+
+- **Update Guest**: Update specific guest details such as name, phone, address, room class, room number, and amount paid.  
+  ![Update Guest Screenshot](documentation/screenshot_update_guest.png)
+
+- **Delete Guest**: Delete a guest’s record using their email.  
+  ![Delete Guest Screenshot](documentation/screenshot_delete_guest.png)
+
 
 ## Technologies Used
 
