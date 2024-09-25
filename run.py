@@ -174,6 +174,32 @@ def delete_guest(email):
     print(f"Guest with email {email} not found.\n")
     input("Press Enter to Continue\n")
 
+"""
+Function to break long text
+"""
+def break_long_text(text, line_length=20):
+    # Split the text into words
+    words = text.split()
+    lines = []
+    current_line = ""
+
+    for word in words:
+        # Check if adding the new word exceeds the desired line length
+        if len(current_line) + len(word) + 1 > line_length:
+            # If it does, start a new line
+            lines.append(current_line)
+            current_line = word  # Start the new line with the current word
+        else:
+            # If it does not, add the word to the current line
+            if current_line:
+                current_line += " "  # Add space before adding the new word
+            current_line += word
+
+    # Append the last line if there's any content left
+    if current_line:
+        lines.append(current_line)
+
+    return "\n".join(lines)
 
 def main():
     """
@@ -286,3 +312,6 @@ def main():
 # Start the program
 clear()
 main()
+
+
+ 
