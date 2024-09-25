@@ -282,3 +282,7 @@ def main():
         else:
             clear()
             print("Invalid choice. Please try again.\n")
+ 
+# Start the program
+clear()
+main()
