@@ -73,10 +73,10 @@ The **Hotel App** is a Python command-line application designed to manage guest 
   ![Sucessfully Added Guest Record](documentation/sucessfully-added-guest-record.png) 
 
 - **View All Guests**: View a list of all the guests stored in the spreadsheet.  
-  ![View All Guests Screenshot](documentation/screenshot_view_all_guests.png)
+  ![View All Guests Screenshot](documentation/screenshot-view-all_-guests.png)
 
 - **Search Guest by Email**: Search for guest details using their email address.  
-  ![Search Guest by Email Screenshot](documentation/screenshot_search_guest.png)
+  ![Search Guest by Email Screenshot](documentation/screenshot-search-guest.png)
 
 - **Update Guest**: Update specific guest details such as name, phone and address.  
   ![Update Guest Screenshot](documentation/screenshot_update_guest.png)

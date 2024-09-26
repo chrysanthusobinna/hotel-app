@@ -243,17 +243,58 @@ def main():
             email = input("Enter guest email to search:\n")
             search_guest_by_email(email)
             input("Press Enter to Continue\n")
+
         elif choice == "4":
             clear()
             email = input("Enter guest email to update:\n")
             guest = get_guest_record_by_email(email)
+            clear()
+
             if guest:
-                data_to_update = {}
-                # Example of updating name
-                new_name = input(f"Enter new name or leave blank to keep '{guest['Name']}':\n")  # noqa
-                if new_name:
-                    data_to_update["Name"] = new_name
-                update_guest(email, data_to_update)
+                
+                # Validate and update guest name
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    name = input(f"Name [{guest['Guest Name']}]: ") or guest['Guest Name']
+                    if is_valid_name(name):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid name - '{name}'")
+
+                
+                # Validate and update phone number
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    phone = input(f"Phone Number [{guest['Phone Number']}]: \n") or guest['Phone Number']
+                    if is_valid_phone(phone):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid phone number - '{phone}'\n") 
+                
+                # Validate and update address
+                while True:
+                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    address = input(f"Address [{guest['Address']}]: \n") or guest['Address']
+                    if is_valid_address(address):
+                        clear()
+                        break
+                    else:
+                        clear()
+                        print(f"You have entered an Invalid address - '{address}'\n")
+                
+                # Prepare the updated data dictionary
+                updated_data = {
+                    "Guest Name": name,
+                    "Phone Number": phone,
+                    "Address": address
+                }
+                
+                # Update the guest record
+                update_guest(email, updated_data)
         elif choice == "5":
             clear()
             email = input("Enter guest email to delete:\n")
