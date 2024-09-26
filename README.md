@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The **Hotel App** is a Python command-line application designed to manage guest information for a hotel. It interacts with a Google Spreadsheet through the **Google Sheets API** and **Google Drive API** to perform CRUD (Create, Read, Update, Delete) operations on guest records. The app allows hotel staff to manage guest information such as name, phone number, address, email, room class, room number, and amount paid, all stored in a spreadsheet on Google Drive.
+The **Hotel App** is a Python command-line application designed to manage guest information for a hotel. It interacts with a Google Spreadsheet through the **Google Sheets API** and **Google Drive API** to perform CRUD (Create, Read, Update, Delete) operations on guest records. The app allows hotel staff to manage guest information such as name, phone number, address and email, all stored in a spreadsheet on Google Drive.
 
 ---
 
@@ -19,7 +19,7 @@ The **Hotel App** is a Python command-line application designed to manage guest 
 1. **Add Guest**  
    - **Given** I am on the main menu,  
    - **When** I choose to add a new guest,  
-   - **Then** I should be prompted to enter the guest's name, phone number, address, email, room class, room number, and amount paid.  
+   - **Then** I should be prompted to enter the guest's name, phone number, address and email.  
    - **And** the system should validate each input and notify me if any information is invalid.  
    - **And** if all information is valid, the guest should be added to the database, and a confirmation message should be displayed.
 
@@ -66,14 +66,11 @@ The **Hotel App** is a Python command-line application designed to manage guest 
   ![Menu Screenshot](documentation/screenshot_menu.png)
 
 - **Add Guest**: Add a new guest and their information to the hotel’s database.  
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-1.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-2.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-3.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-4.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-5.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-6.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-7.png)
-  ![Enter Guest Name Screenshot](documentation/screenshot_add_guest-8.png)
+  ![Enter Guest Name Screenshot](documentation/enter-guest-name-screenshot.png) 
+  ![Enter Guest Phone Number Screenshot](documentation/enter-guest-phone-number-screenshot.png)
+  ![Enter Guest Address Screenshot](documentation/enter-guest-address-screenshot.png) 
+  ![Enter Guest Email Address Screenshot](documentation/enter-guest-email-address-screenshot.png)
+  ![Sucessfully Added Guest Record](documentation/sucessfully-added-guest-record.png) 
 
 - **View All Guests**: View a list of all the guests stored in the spreadsheet.  
   ![View All Guests Screenshot](documentation/screenshot_view_all_guests.png)
@@ -81,7 +78,7 @@ The **Hotel App** is a Python command-line application designed to manage guest 
 - **Search Guest by Email**: Search for guest details using their email address.  
   ![Search Guest by Email Screenshot](documentation/screenshot_search_guest.png)
 
-- **Update Guest**: Update specific guest details such as name, phone, address, room class, room number, and amount paid.  
+- **Update Guest**: Update specific guest details such as name, phone and address.  
   ![Update Guest Screenshot](documentation/screenshot_update_guest.png)
 
 - **Delete Guest**: Delete a guest’s record using their email.  
@@ -136,7 +133,7 @@ To run this project on your local machine, follow these steps:
 ## Application Workflow
 
 ### 1. **Add Guest**:
-   - Input guest details: name, phone number, address, email, room class, room number, and amount paid.
+   - Input guest details: name, phone number, address and email.
    - The app validates all inputs and checks for duplicate emails before adding the guest.
 
 ### 2. **View All Guests**:
@@ -164,9 +161,7 @@ The app uses a Google Spreadsheet as the backend database. Each guest's data is 
 - Phone Number
 - Address
 - Email Address
-- Room Class
-- Room Number
-- Amount Paid
+
 
 ### Flowchart
 
@@ -181,9 +176,6 @@ The app's process is mapped out in a flowchart to visualize the flow of operatio
 - **Name**: Ensures the name contains only alphabetical characters and hyphens.
 - **Phone Number**: Validates phone numbers using a regular expression.
 - **Email**: Validates the email format and checks for duplicates.
-- **Room Class**: Ensures the room class is one of "Single", "Double", or "Suite".
-- **Room Number**: Ensures the room number is a positive integer.
-- **Amount Paid**: Ensures the amount paid is a valid, non-negative number.
 
 ---
 

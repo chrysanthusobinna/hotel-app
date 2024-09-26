@@ -29,6 +29,7 @@ def clear():
     """
     os.system("cls" if os.name == "nt" else "clear")
 
+#INPUT VALIDATION FUNCTIONS
 
 def is_valid_name(name):
     trimmed_name = name.strip()
@@ -63,32 +64,13 @@ def email_exists(email):
             return True
     return False
 
+#FEATURE FUNCTIONS
 
-def is_valid_room_class(room_class):
-    accepted_classes = {'single', 'double', 'suite'}
-    return room_class.lower() in accepted_classes
-
-
-def is_valid_room_number(room_number):
-    room_number_str = str(room_number)
-    return room_number_str.isdigit() and int(room_number_str) > 0
-
-
-def is_valid_amount_paid(amount_paid):
-    try:
-        float_amount = float(amount_paid)
-        return float_amount >= 0
-    except ValueError:
-        return False
-
-
-def add_guest(
-        name, phone, address, email, room_class, room_number, amount_paid):
+def add_guest(name, phone, address, email):
     """
     Adds a new guest entry to the spreadsheet.
     """
-    guest_data = [
-            name, phone, address, email, room_class, room_number, amount_paid]
+    guest_data = [name, phone, address, email]
     SHEET.worksheet(WORKSHEET).append_row(guest_data)
     clear()
     print(f"Added guest: {name}\n")
@@ -252,32 +234,7 @@ def main():
                 else:
                     clear()
                     break
-            while True:
-                room_class = input(
-                    "Enter room class [Single, Double, Suite]:\n")
-                if not is_valid_room_class(room_class):
-                    clear()
-                    print(f"Invalid Room class - '{room_class}'\n")
-                else:
-                    clear()
-                    break
-            while True:
-                room_number = input("Enter room number:\n")
-                if not is_valid_room_number(room_number):
-                    clear()
-                    print(f"Invalid Room Number - '{room_number}'\n")
-                else:
-                    clear()
-                    break
-            while True:
-                amount_paid = input("Enter amount paid:\n")
-                if not is_valid_amount_paid(amount_paid):
-                    clear()
-                    print(f"Invalid Amount Paid - '{amount_paid}'\n")
-                else:
-                    clear()
-                    break
-            add_guest(name, phone, address, email, room_class, room_number, amount_paid)  # noqa
+            add_guest(name, phone, address, email)
         elif choice == "2":
             clear()
             view_all_guests()
