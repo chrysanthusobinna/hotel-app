@@ -85,7 +85,7 @@ The **Hotel App** is a Python command-line application designed to manage guest 
   ![Updating Address - Screenshot](documentation/screenshot-updating-address.png) 
 
 - **Delete Guest**: Delete a guest’s record using their email.  
-  ![Delete Guest Screenshot](documentation/screenshot_delete_guest.png)
+  ![Delete Guest Screenshot](documentation/screenshot-delete-guest.png)
 
 
 ## Technologies Used
