@@ -302,6 +302,10 @@ def main():
 
                 # Update the guest record
                 update_guest(email, updated_data)
+            else:
+                clear()
+                print(f"The Email Address you entered doesnt match any record - '{email}'\n")
+                
         elif choice == "5":
             clear()
             email = input("Enter guest email to delete:\n")
