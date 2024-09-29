@@ -29,7 +29,8 @@ def clear():
     """
     os.system("cls" if os.name == "nt" else "clear")
 
-#INPUT VALIDATION FUNCTIONS
+# INPUT VALIDATION FUNCTIONS
+
 
 def is_valid_name(name):
     trimmed_name = name.strip()
@@ -64,7 +65,8 @@ def email_exists(email):
             return True
     return False
 
-#FEATURE FUNCTIONS
+# FEATUREFUNCTIONS
+
 
 def add_guest(name, phone, address, email):
     """
@@ -156,9 +158,12 @@ def delete_guest(email):
     print(f"Guest with email {email} not found.\n")
     input("Press Enter to Continue\n")
 
+
 """
 Function to break long text
 """
+
+
 def break_long_text(text, line_length=20):
     # Split the text into words
     words = text.split()
@@ -182,6 +187,7 @@ def break_long_text(text, line_length=20):
         lines.append(current_line)
 
     return "\n".join(lines)
+
 
 def main():
     """
@@ -251,10 +257,10 @@ def main():
             clear()
 
             if guest:
-                
                 # Validate and update guest name
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    print("""Press Enter to keep the current value or
+                            type a new value to update.\n""")
                     name = input(f"Name [{guest['Guest Name']}]: ") or guest['Guest Name']
                     if is_valid_name(name):
                         clear()
@@ -263,21 +269,22 @@ def main():
                         clear()
                         print(f"You have entered an Invalid name - '{name}'")
 
-                
                 # Validate and update phone number
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    print("""Press Enter to keep the current
+                            value or type a new value to update.\n""")
                     phone = input(f"Phone Number [{guest['Phone Number']}]: \n") or guest['Phone Number']
                     if is_valid_phone(phone):
                         clear()
                         break
                     else:
                         clear()
-                        print(f"You have entered an Invalid phone number - '{phone}'\n") 
-                
+                        print(f"You have entered an Invalid phone number - '{phone}'\n")
+
                 # Validate and update address
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")
+                    print("""Press Enter to keep the current
+                            value or type a new value to update.\n""")
                     address = input(f"Address [{guest['Address']}]: \n") or guest['Address']
                     if is_valid_address(address):
                         clear()
@@ -285,14 +292,14 @@ def main():
                     else:
                         clear()
                         print(f"You have entered an Invalid address - '{address}'\n")
-                
+
                 # Prepare the updated data dictionary
                 updated_data = {
                     "Guest Name": name,
                     "Phone Number": phone,
                     "Address": address
                 }
-                
+
                 # Update the guest record
                 update_guest(email, updated_data)
         elif choice == "5":
@@ -306,10 +313,8 @@ def main():
         else:
             clear()
             print("Invalid choice. Please try again.\n")
- 
+
+
 # Start the program
 clear()
 main()
-
-
- 
