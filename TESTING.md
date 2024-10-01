@@ -54,7 +54,8 @@ I used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to 
 
 Defensive programming was employed to ensure the application handles incorrect inputs appropriately. This was also tested manually. Below is a screenshot demonstrating this:
 
-![Defensive Programming Screenshot](path-to-defensive-programming-screenshot)
+![Defensive Programming Screenshot](documentation/defence-1.png)
+![Defensive Programming Screenshot](documentation/defence-2.png)
 
 ## Bugs
 
