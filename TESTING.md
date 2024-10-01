@@ -22,7 +22,7 @@ This section details the testing conducted on each feature of the project to ens
 
 Tested the deployed project on various browsers to ensure consistent performance. Below are screenshots from Firefox, Chrome, and Edge (align screenshots side by side):
 
-![Firefox](path-to-firefox-screenshot) ![Chrome](path-to-chrome-screenshot) ![Edge](path-to-edge-screenshot)
+![Firefox](documentation/firefox-screenshot.png) ![Chrome](documentation/chrome-screenshot.png) ![Edge](documentation/edge-screenshot.png)
 
 ### Device Compatibility
 
@@ -48,7 +48,7 @@ To ensure correct input and input types, I manually tested the code.
 
 I used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files. Below is a screenshot of the validation result:
 
-![Validation Screenshot](documentation/validation/path-to-screenshot.png)
+![Validation Screenshot](documentation/validation.png)
 
 ## Defensive Programming
 

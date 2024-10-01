@@ -43,9 +43,9 @@ def is_valid_name(name):
 
 
 def is_valid_phone(phone):
-    # A simple regex for validating phone numbers (adjust as needed)
+    # A regex for validating phone numbers that may include spaces
     phone_str = str(phone)  # Ensure the phone number is a string
-    return bool(re.match(r'^\+?[1-9]\d{1,14}$', phone_str))
+    return bool(re.match(r'^\+?[0-9\s]{8,15}$', phone_str))
 
 
 def is_valid_address(address):
