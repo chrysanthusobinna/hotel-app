@@ -315,6 +315,7 @@ def main():
         else:
             clear()
             print("Invalid choice. Please try again.\n")
+            input("Press Enter to Continue\n")
 
 
 # Start the program
