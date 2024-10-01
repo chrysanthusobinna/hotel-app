@@ -1,4 +1,3 @@
-
 # Testing
 
 > [!NOTE]  
@@ -42,7 +41,7 @@ Collected user feedback from friends and peers and implemented improvements to e
 
 ## Code Validation
 
-To ensure correct input and input types, I manually tested the code. 
+To ensure correct input and input types, I manually tested the code.
 
 ### Python
 
@@ -50,14 +49,72 @@ I used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to 
 
 ![Validation Screenshot](documentation/validation.png)
 
+## Input Validation Testing
+
+This section details the input validation functions implemented in the project to ensure that user inputs are correctly validated before proceeding.
+
+### Name Validation (`is_valid_name`)
+
+- **Purpose**: Ensures that the guest name contains only alphabetic characters and hyphens. The function trims any surrounding spaces and checks each part of the name for validity.
+- **How it Works**: The input is split into words, and each word is validated to ensure that only alphabetic characters or hyphens are present.
+- **Test**: Entered invalid characters like numbers or special characters (e.g., "John123" or "Mary!") and ensured the function rejected them, while valid inputs like "John-Doe" were accepted.
+  
+Screenshot:
+![Name Validation Screenshot](documentation/name-validation.png)
+
+### Phone Number Validation (`is_valid_phone`)
+
+- **Purpose**: Validates the guest’s phone number, allowing optional spaces and ensuring the number is between 8 and 15 characters long. The phone number can also start with an optional `+` for international numbers.
+- **How it Works**: The function uses a regular expression to ensure the phone number consists of digits and optional spaces, with a valid length range.
+- **Test**: Tested invalid phone numbers like "12345" or "abcdef", which were rejected, while valid numbers like "09033526576" or "+1 234 567 8901" were accepted.
+  
+Screenshot:
+![Phone Validation Screenshot](documentation/phone-validation.png)
+
+### Address Validation (`is_valid_address`)
+
+- **Purpose**: Ensures that the address field is not empty. This is a basic check to make sure users provide some input for the address.
+- **How it Works**: The function trims the input and checks if there is any content remaining after trimming.
+- **Test**: Entered empty strings or strings with just spaces, which were rejected, while valid addresses like "123 Main St." were accepted.
+  
+Screenshot:
+![Address Validation Screenshot](documentation/address-validation.png)
+
+### Email Validation (`is_valid_email`)
+
+- **Purpose**: Ensures that the provided email address follows a valid format (e.g., name@domain.com). It uses a regular expression to match a valid email pattern.
+- **How it Works**: The regular expression checks for a typical email format, including alphanumeric characters, dots, and other valid email characters.
+- **Test**: Tested invalid emails like "name@domain" or "name.com", which were rejected, while valid emails like "john@example.com" were accepted.
+  
+Screenshot:
+![Email Validation Screenshot](documentation/email-validation.png)
+
+### Email Existence Check (`email_exists`)
+
+- **Purpose**: Checks if the entered email address already exists in the system by querying the Google Sheets database.
+- **How it Works**: The function retrieves all records from the worksheet and compares the input email to the existing email addresses.
+- **Test**: Entered an email address that already existed in the system, and the function correctly identified it, preventing duplicate entries.
+  
+Screenshot:
+![Email Exists Screenshot](documentation/email-exists.png)
+
 ## Defensive Programming
 
-Defensive programming was employed to ensure the application handles incorrect inputs appropriately. This was also tested manually. Below is a screenshot demonstrating this:
+Defensive programming was employed throughout the application to ensure it handles incorrect inputs appropriately. One key area where this is implemented is around the **Main Menu**. When a user enters an invalid choice (such as a non-existent option in the menu), the application handles the error gracefully by:
+
+- Displaying an error message indicating an invalid choice.
+- Pausing to allow the user to read the message.
+- Returning to the main menu, prompting the user to try again.
+
+This ensures that the app remains user-friendly, even when unexpected inputs occur, and avoids crashes or unexpected behavior.
+
+Below is a screenshot demonstrating this error handling in action:
 
 ![Defensive Programming Screenshot](documentation/defence-1.png)
 ![Defensive Programming Screenshot](documentation/defence-2.png)
 
+---
+
 ## Bugs
 
 No bugs were found during the testing process.
- 
