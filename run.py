@@ -140,7 +140,6 @@ def update_guest(email, data_to_update):
             input("Press Enter to Continue\n")
             return
     print(f"Guest with email {email} not found.")
-    input("Press Enter to Continue\n")
 
 
 def delete_guest(email):
@@ -305,6 +304,7 @@ def main():
             else:
                 clear()
                 print(f"The Email Address you entered doesnt match any record - '{email}'\n")
+                input("Press Enter to Continue\n")
                 
         elif choice == "5":
             clear()
