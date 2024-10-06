@@ -170,7 +170,107 @@ The app uses a Google Spreadsheet as the backend database. Each guest's data is 
 
 The app's process is mapped out in a flowchart to visualize the flow of operations from the menu choices to CRUD functionalities. The flowchart can be found in the `documentation` folder.
 
-![Flowchart](documentation/flowchart.png)
+
+#### 1. Flowchart for Updating Guest Record
+
+```mermaid
+flowchart TD
+    Start --> InputGuestName
+    InputGuestName --> |Is Guest Name Empty?| GuestNameEmpty{Yes}
+    InputGuestName --> |No| GuestNameValid
+    GuestNameEmpty --> GuestName[Existing Guest Name]
+    GuestNameValid --> |Is Guest Name Valid?| GuestNameValidYes{Yes}
+    GuestNameValidYes --> GuestName[New Guest Name]
+    GuestNameValid --> |No| InputGuestAddress
+    
+    InputGuestAddress --> |Is Guest Address Empty?| GuestAddressEmpty{Yes}
+    InputGuestAddress --> |No| GuestAddressValid
+    GuestAddressEmpty --> GuestAddress[Existing Guest Address]
+    GuestAddressValid --> |Is Guest Address Valid?| GuestAddressValidYes{Yes}
+    GuestAddressValidYes --> GuestAddress[New Guest Address]
+    GuestAddressValid --> |No| InputGuestEmailAddress
+
+    InputGuestEmailAddress --> |Is Guest Email Address Empty?| GuestEmailEmpty{Yes}
+    InputGuestEmailAddress --> |No| GuestEmailValid
+    GuestEmailEmpty --> GuestEmail[Existing Guest Email Address]
+    GuestEmailValid --> |Is Guest Email Valid?| GuestEmailValidYes{Yes}
+    GuestEmailValidYes --> GuestEmail[New Guest Email Address]
+    GuestEmailValid --> |No| InputGuestPhoneNumber
+
+    InputGuestPhoneNumber --> |Is Phone Number Empty?| PhoneNumberEmpty{Yes}
+    InputGuestPhoneNumber --> |No| PhoneNumberValid
+    PhoneNumberEmpty --> Phone[Existing Phone Number]
+    PhoneNumberValid --> |Is Phone Valid?| PhoneNumberValidYes{Yes}
+    PhoneNumberValidYes --> Phone[New Phone Number]
+    PhoneNumberValid --> |No| SaveRecord
+
+    SaveRecord --> Stop
+```
+
+source: [Mermaid](https://mermaid.live/edit#pako:eNqNVdtu4jAU_JXIzxQ5F5ooD61WKqr6glZLVWl3w4OXuBCVxJHjtKWUf1_n5OJLgkSf6Mx4zjkzEpzQlqUUxej1wD62e8KF8_yQFI78W4vmv5ubO-epKGvxWNNKrEhOW9bEQPb9VDmAOAAt81Ic77-dQQTA6TetzpctVkx78EIOWdpqTRPQDtDf5WdWiazYadM31jOwmtoSiHt7qFxSW3TEWfNX9OO60c116uofacppVbVyO5KOtFbuUSPbDrwcr-E1JNyhdsi6m7qzQ-2oO3gzfj8VeL-Hkbmun4jdoscbqfCvWsasYJmT7DD0YOems9YpQE3XAdTlMsamQyNA2X0oO3U7YHYXxkob22Gqj_aF0YbSTnRhkPY2qoerFzG7-LlnBV3V-T_Kx1Vo5HAEYE4H9hVowssdjNyaTTRQ68D2Az2AKn99kc3omZl8q-0zt2Vm6BOsNr4J_OrJzYFr8k5_0S3jaZ-vQkC1FqxMCjRDOeWyqlT-LJwaYYLEnsovfhTLjynhbwlKirPUkVqw9bHYoljwms5QXaZE0IeM7DjJUfxKDpVES1Kg-IQ-Uey6_txf-G7gel6IbxcLb4aOKF6Ec4wjzw9DF_tR6IfnGfpiTDrgeYSDKLiNAoyxjwPPA7s_QLYzOat3-27W-T-5cVbZ)
+
+#### 2. Flowchart for Deleting Guest Record
+```mermaid
+flowchart TD
+    Start --> InputEmailAddress
+    InputEmailAddress --> |Does Guest Email Address Exist?| GuestEmailExists{Yes}
+    GuestEmailExists --> DeleteRecord
+    GuestEmailExists --> |No| NoRecordFound
+    DeleteRecord --> Stop
+    NoRecordFound --> Stop
+```
+
+Source: [Mermaid](https://mermaid.live/edit#pako:eNp9kLtOwzAUQH_FunMa5VlHHkBIKYilA2UBZbHi24dI4sgP0ZLk33EdKpUi4en6nuMzeIBaCgQG20Z-1nuuDHktq464szHn22JxR5673ppVyw_NgxAKtZ6FP2svj6VETZ4sakM8JBe6Oh60uR9n5pHf6OEN9TQnb5EvltigwRespRL_aONajmQtZ-9R2u5Hvn7uxY2R_Yx-2VcMAmhRub5wPzOc3QrMHlusgLlRcPVRQdVNzuPWyM2pq4EZZTEA2wtusDzwneLtZdnzDtgAR2BxnIZpnsZZnCQ0WuZ5EsAJWE7DKCqSlNI4Sgua0imALyldIAqLKCuypYNJnLuJ-ty7h3NdSbvbA9vyRuP0DYI-lYk)
+
+#### 3. Flowchart for Searching Guest Feature
+```mermaid
+flowchart TD
+    Start --> InputGuestEmailAddress
+    InputGuestEmailAddress --> |Does Guest Email Exist?| GuestEmailExists{Yes}
+    GuestEmailExists --> ShowGuestRecord
+    GuestEmailExists --> |No| NoRecordFound
+    ShowGuestRecord --> Stop
+    NoRecordFound --> Stop
+```
+
+Source: [Mermaid](https://mermaid.live/edit#pako:eNp9kMtOwzAQRX_FmnUa5VlHXoCQWhCbLigbUDZW7DYRTSbyQ21J8u-4TiWgQng1nnPmjjQDVCgkMNgd8FjVXBnyuio74t7WXH6LxR157nprnqzUZt3y5vAghJJaz9bfzI-NK5SaeEY8JOtTo839SL5939HDm9TTnHeLfNK2xqMHL7JCJf4xxw2OZIOz94i2u8o3CXOqwX6mvwZ-MAiglcqtEO5Cw8UtwdSylSUwVwquPkoou8l53BrcnrsKmFFWBmB7wY1cNXyveAtsxw_adXveARvgBCyO0zDN0ziLk4RGyzxPAjgDy2kYRUWSUhpHaUFTOgXwiegSorCIsiJbOpjEuauoj3v3cN6p0O7r667pC5lomao)
+
+
+#### 4. Flowchart for Viewing All Guest Records
+```mermaid
+flowchart TD
+    Start --> ShowAllGuestRecords
+    ShowAllGuestRecords --> Stop
+```
+
+Source: [Mermaid](https://mermaid.live/edit#pako:eNplTbtugzAU_RV0Z4L8wDHyUKlSpO4lU-XFwk6IAr7I2EpSxL_XJNl6p3PPc4EOrQMFpwFvXW9CLI4H7Yt8bdy-3e6jaHu8fQ7DV3Jz_HYdBju_Lf-FVyDipD2UMLowmovN_cuW0BB7NzoNKkNrwlWD9mv2mRSxffgOVAzJlZAma6I7XMw5mBHUyQxzZifjQS1wB0Upr7jgtKaMSbIXgpXwACVkRUjDuJSU8EZyuZbwi5gbSNWQuqn3WWRUbOhZ9_MUX5sB07l_b61_Pb1WSg)
+
+
+#### 5. Flowchart for New Guest Record Feature
+```mermaid
+flowchart TD
+    Start --> InputGuestName
+    InputGuestName --> |Is Guest Name Valid?| GuestNameValid{Yes}
+    GuestNameValid --> InputGuestAddress
+    GuestNameValid --> |No| InvalidGuestName["You have entered an invalid guest name"]
+
+    InputGuestAddress --> |Is Guest Address Valid?| GuestAddressValid{Yes}
+    GuestAddressValid --> InputGuestEmailAddress
+    GuestAddressValid --> |No| InvalidGuestAddress["You have entered an invalid guest address"]
+
+    InputGuestEmailAddress --> |Is Guest Email Valid?| GuestEmailValid{Yes}
+    GuestEmailValid --> InputGuestPhoneNumber
+    GuestEmailValid --> |No| InvalidGuestEmail["You have entered an invalid email address"]
+
+    InputGuestPhoneNumber --> |Is Phone Number Valid?| PhoneNumberValid{Yes}
+    PhoneNumberValid --> SaveGuestInformation
+    PhoneNumberValid --> |No| InvalidPhoneNumber["You have entered an invalid phone number"]
+
+    SaveGuestInformation --> Stop
+```
+
+Source: [Mermaid](https://mermaid.live/edit#pako:eNqNk0tvgkAUhf_K5K7V8BAxLNo0sWncmCY2TWzpYipXIZUZMgy2FvzvHQZUxFdZDecczr0fgRzmPEDwYLHi3_OQCkleRj4j6prK8q7bvSNjlmTyKcNUTmiMlXus6VgxTolWiJZe6SoK7guyD2khn2G6rSqOjdakhyAQmKYXk8WEFyq-LoW9_e7DjGckpGskyCQKDAhlJKpiZKmXYyUDfPisDVKPbLHs1COcWjxL1PRaUI8xjVanZCdPnMDViX_x0br_HGJzgRanto4ptXSW8eC0CJ9DznCSxZ8oLsdP8LR_Aw71ftfgGrP3bFojtbiDawTbdG1LF03VSnrCmC24iKmMOLsSb-I1Ajf4Er0pq17dAe_c7GopyROfQQdiVHIUqH84Lx_xQYZYfuGeOgZUfPngs63K0Uzy6YbNwZMiww5kSUAljiK6FDTeiQll4OXwA55p2j3bsc2-aVmuMXAcqwMb8By3ZxhDy3Zd07CHru1uO_DLuSowekOjP-wPlGmZTnnSdW_arNoFz5YheAu6SnH7B_diiLI)
+
 
 ---
 
