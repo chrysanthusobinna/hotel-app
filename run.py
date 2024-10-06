@@ -54,7 +54,9 @@ def is_valid_address(address):
 
 def is_valid_email(email):
     # Simple regex for validating email format
-    return bool(re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email))  # noqa
+    return bool(
+        re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email)
+    )
 
 
 def email_exists(email):
@@ -258,7 +260,10 @@ def main():
             if guest:
                 # Validate and update guest name
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")  # noqa
+                    print(
+                        "Press Enter to keep the current value "
+                        "or type a new value to update.\n"
+                    )
 
                     name = input(f"Name [{guest['Guest Name']}]: ") or guest['Guest Name']  # noqa
                     if is_valid_name(name):
@@ -270,25 +275,37 @@ def main():
 
                 # Validate and update phone number
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")  # noqa
+                    print(
+                        "Press Enter to keep the current value "
+                        "or type a new value to update.\n"
+                    )
                     phone = input(f"Phone Number [{guest['Phone Number']}]: \n") or guest['Phone Number']  # noqa
                     if is_valid_phone(phone):
                         clear()
                         break
                     else:
                         clear()
-                        print(f"You have entered an Invalid phone number - '{phone}'\n")  # noqa
+                        print(
+                            "You have entered an Invalid phone number - "
+                            f"'{phone}'\n"
+                        )
 
                 # Validate and update update address
                 while True:
-                    print("Press Enter to keep the current value or type a new value to update.\n")  # noqa
+                    print(
+                        "Press Enter to keep the current value "
+                        "or type a new value to update.\n"
+                    )
                     address = input(f"Address [{guest['Address']}]: \n") or guest['Address']  # noqa
                     if is_valid_address(address):
                         clear()
                         break
                     else:
                         clear()
-                        print(f"You have entered an Invalid address  - '{address}'\n")  # noqa
+                        print(
+                            "You have entered an Invalid address  - "
+                            f"'{address}'\n"
+                        )
 
                 # Prepare the updated data dictionary
                 updated_data = {
@@ -301,7 +318,10 @@ def main():
                 update_guest(email, updated_data)
             else:
                 clear()
-                print(f"The Email Address you entered doesnt match any record - '{email}'\n")  # noqa
+                print(
+                    "The Email Address you entered doesnt match any record - "
+                    f"'{email}'\n"
+                )
                 input("Press Enter to Continue\n")
 
         elif choice == "5":
