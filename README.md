@@ -4,8 +4,9 @@
 
 The **Hotel App** is a Python command-line application designed to manage guest information for a hotel. It interacts with a Google Spreadsheet through the **Google Sheets API** and **Google Drive API** to perform CRUD (Create, Read, Update, Delete) operations on guest records. The app allows hotel staff to manage guest information such as name, phone number, address and email, all stored in a spreadsheet on Google Drive.
 
----
+**Deployment Link**: [Hotel App Deployment](https://hotelapp-a7c2beab62c3.herokuapp.com/){:target="_blank"}
 
+---
 
 
 ## User Story
