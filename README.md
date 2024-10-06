@@ -280,6 +280,12 @@ Source: [Mermaid](https://mermaid.live/edit#pako:eNqNk0tvgkAUhf_K5K7V8BAxLNo0sWn
 - **Phone Number**: Validates phone numbers using a regular expression.
 - **Email**: Validates the email format and checks for duplicates.
 
+## Testing
+
+> [!NOTE]  
+> SEE [TESTING.md](TESTING.md) file.
+
+
 ---
 
 ## Dependencies
